@@ -10,6 +10,13 @@ I build production AI systems — real-time inference pipelines, LLM-powered app
 
 ## Featured Projects
 
+### [tracelab-ai-agent-observability](https://github.com/Lkhanaajav/tracelab-ai-agent-observability)
+AI agent observability and evaluation platform. A Python tracing SDK instruments agent runs and ships prompts, tool calls, observations, latency, token usage, and cost to a FastAPI backend. A React dashboard replays trace timelines, shows structured JSON event payloads, and renders eval scorecards. Includes deterministic eval quality gates usable in CI for regression-testing agent behavior before release.
+
+**Stack:** Python · FastAPI · SQLite · React · TypeScript · Vite · CI (GitHub Actions)
+
+---
+
 ### [email-guardian](https://github.com/Lkhanaajav/email-guardian)
 AI-powered email intelligence platform. Connects to Gmail via OAuth 2.0, auto-fetches and classifies every email, generates Claude-powered summaries, extracts action items, and lets you query your inbox in natural language.
 
@@ -20,7 +27,7 @@ AI-powered email intelligence platform. Connects to Gmail via OAuth 2.0, auto-fe
 ### [Real-Time Monocular BEV Perception](https://github.com/Lkhanaajav/live_test_scooter_project)
 MS thesis. Full autonomous navigation pipeline for a robotic scooter — monocular depth → semantic segmentation → BEV projection → navigable path extraction → control — running at **3.0 ms per frame** on CPU-only embedded hardware. No LiDAR. No GPU.
 
-**Results:** IoU 0.964 · 14.5 px mean path accuracy (p < 10⁻⁶¹) · 330 Hz capable · 4 refinement iterations
+**Results:** IoU 0.964 · 14.5 px mean path accuracy (p < 10⁻⁶¹) · 330 Hz capable
 
 **Stack:** Python · PyTorch · OpenCV · C++ · Linux · ARM64
 
