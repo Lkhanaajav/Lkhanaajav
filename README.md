@@ -66,6 +66,5 @@ Selected as 1 of 5 engineering students for a highly funded federally sponsored 
 - Co-founding **CompletaAI** — AI matching and retrieval engine built on learned embeddings + multi-signal ranking
 - Finishing MS ECE thesis on real-time monocular BEV perception
 - Actively applying to ML / Robotics / AI engineering roles in **Austin, TX**
-- F-1 STEM OPT eligible; H-1B sponsorship required long-term
 
 **Email:** lhanaamijgee@gmail.com · [LinkedIn](https://linkedin.com/in/lhanaa)
