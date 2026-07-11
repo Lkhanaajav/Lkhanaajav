@@ -10,7 +10,7 @@
 
 **AI Engineer · MS ECE @ University of Oklahoma (May 2026) · Austin, TX**
 
-IMO Silver Medalist · CompletaAI Co-founder · Published Researcher (IEEE, MDPI Sensors)
+IMO Silver Medalist · CompletaAI Full Stack Engineer & Agentic AI Engineer · Published Researcher (IEEE, MDPI Sensors)
 
 I build production AI systems — real-time inference pipelines, LLM-powered applications, and robotics perception stacks. Currently finishing my MS thesis on monocular BEV perception for autonomous navigation while co-founding an AI startup and running ML research with a federally funded sensor program.
 
