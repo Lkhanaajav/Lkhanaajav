@@ -1,32 +1,48 @@
-import sys
+import math
 from PIL import Image, ImageOps, ImageFilter
 
 RAMP = "@%#WM8B$&okbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+W, H = 70, 54
+SOBEL_X = ImageFilter.Kernel((3, 3), [-1, 0, 1, -2, 0, 2, -1, 0, 1], scale=1, offset=128)
+SOBEL_Y = ImageFilter.Kernel((3, 3), [-1, -2, -1, 0, 0, 0, 1, 2, 1], scale=1, offset=128)
 
-def convert(path, width=62, height=48, white=195, crop=(95, 5, 290, 278)):
-    img = Image.open(path).convert("L")
-    img = img.crop(crop)                       # face-dominant crop
-    img = ImageOps.autocontrast(img, cutoff=1)
-    # large-radius unsharp = local contrast: darkens eye/nose shadows vs skin
-    img = img.filter(ImageFilter.UnsharpMask(radius=10, percent=130, threshold=2))
-    img = img.filter(ImageFilter.SHARPEN)
-    img = img.resize((width, height), Image.LANCZOS)
-    px = img.load()
-    lines = []
-    for y in range(height):
-        row = ""
-        for x in range(width):
-            p = px[x, y]
-            if p >= white:
-                row += " "
-            else:
-                t = (p / white) ** 1.3         # soft shadows stay light chars
-                row += RAMP[int(t * (len(RAMP) - 2))]
-        lines.append(row.rstrip())
-    return "\n".join(lines)
+img = Image.open("photo_clean.png").convert("L")
+img = img.crop((95, 5, 290, 278))
+img = ImageOps.autocontrast(img, cutoff=1)
 
-if __name__ == "__main__":
-    white = int(sys.argv[1]) if len(sys.argv) > 1 else 195
-    art = convert("photo_clean.png", white=white)
-    open("ascii_art.txt", "w").write(art)
-    print(art)
+big = img.resize((W * 3, H * 3), Image.LANCZOS).filter(ImageFilter.GaussianBlur(1))
+edges = big.filter(ImageFilter.FIND_EDGES).resize((W, H), Image.LANCZOS).load()  # G's detector
+gx = big.filter(SOBEL_X).resize((W, H), Image.LANCZOS).load()
+gy = big.filter(SOBEL_Y).resize((W, H), Image.LANCZOS).load()
+dark = img.filter(ImageFilter.UnsharpMask(radius=10, percent=110)).resize((W, H), Image.LANCZOS).load()
+
+def edge_glyph(dx, dy):
+    ang = math.degrees(math.atan2(dy, dx)) % 180
+    if ang < 22.5 or ang >= 157.5:
+        return "|"
+    if ang < 67.5:
+        return "\\"
+    if ang < 112.5:
+        return "-"
+    return "/"
+
+grid = [[" "] * W for _ in range(H)]
+for y in range(H):
+    for x in range(W):
+        p = dark[x, y]
+        if p < 130:
+            grid[y][x] = RAMP[int(min((p / 195) ** 1.25, 1.0) * (len(RAMP) - 2))]
+        elif edges[x, y] > 26 and p < 215:
+            grid[y][x] = edge_glyph(gx[x, y] - 128, gy[x, y] - 128)
+
+for y in range(H):
+    for x in range(W):
+        if grid[y][x] != " ":
+            nb = sum(1 for j in range(max(0, y-1), min(H, y+2))
+                     for i in range(max(0, x-1), min(W, x+2))
+                     if (i, j) != (x, y) and grid[j][i] != " ")
+            if nb <= 1:
+                grid[y][x] = " "
+
+open("ascii_art.txt", "w").write("\n".join("".join(r).rstrip() for r in grid))
+print("ascii_art.txt written")
