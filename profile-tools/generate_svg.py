@@ -5,7 +5,7 @@ from html import escape
 ART_FILE = "ascii_art.txt"
 INFO_WIDTH = 62          # every info line padded to this many chars
 CHAR_W = 7.2             # 12px monospace advance
-ART_LH, INFO_LH = 13, 17
+ART_LH, INFO_LH = 13, 18
 PAD = 26
 
 THEMES = {
@@ -37,6 +37,16 @@ INFO = [
     ("KV", ("Realtime", "3ms/frame CPU inference, embedded ARM64")),
     ("KV", ("Robotics", "autonomous navigation, sensor fusion, SLAM")),
     ("KV", ("Data", "pandas, NumPy, time-series, IoT pipelines")),
+    ("BLANK", None),
+    ("SECTION", "Currently"),
+    ("KV", ("Thesis", "real-time monocular BEV navigation")),
+    ("KV", ("Building", "AI agent observability & evals")),
+    ("KV", ("Seeking", "AI/ML engineering roles in Austin")),
+    ("BLANK", None),
+    ("SECTION", "Contact"),
+    ("KV", ("Email", "lhanaamijgee@gmail.com")),
+    ("KV", ("LinkedIn", "linkedin.com/in/lhanaa")),
+    ("KV", ("GitHub", "github.com/Lkhanaajav")),
 ]
 
 art_lines = open(ART_FILE).read().splitlines()
