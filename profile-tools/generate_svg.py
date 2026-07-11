@@ -5,7 +5,7 @@ from html import escape
 ART_FILE = "ascii_art.txt"
 INFO_WIDTH = 62          # every info line padded to this many chars
 CHAR_W = 7.2             # 12px monospace advance
-ART_LH, INFO_LH = 13, 18
+ART_LH = 13
 PAD = 26
 
 THEMES = {
@@ -29,7 +29,7 @@ INFO = [
     ("SECTION", "Languages & AI/ML"),
     ("KV", ("Programming", "Python, C/C++, TypeScript, JavaScript, SQL")),
     ("KV", ("AI/ML", "PyTorch, Transformers, LLMs, RAG, CV")),
-    ("KV", ("LLM", "agentic workflows, prompt engineering, evals")),
+    ("KV", ("LLM", "MCP servers, agentic workflows, evals")),
     ("KV", ("Vision", "segmentation, depth, BEV perception")),
     ("BLANK", None),
     ("SECTION", "Systems & Robotics"),
@@ -38,9 +38,14 @@ INFO = [
     ("KV", ("Robotics", "autonomous navigation, sensor fusion, SLAM")),
     ("KV", ("Data", "pandas, NumPy, time-series, IoT pipelines")),
     ("BLANK", None),
+    ("SECTION", "Featured Projects"),
+    ("KV", ("timeseries-mcp", "MCP server: stats tools for AI agents")),
+    ("KV", ("mcp-trajectory-evals", "eval harness for tool-using agents")),
+    ("KV", ("tracelab", "AI agent observability & evaluation")),
+    ("KV", ("email-guardian", "Claude-powered email intelligence")),
+    ("BLANK", None),
     ("SECTION", "Currently"),
     ("KV", ("Thesis", "real-time monocular BEV navigation")),
-    ("KV", ("Building", "AI agent observability & evals")),
     ("KV", ("Seeking", "AI/ML engineering roles in Austin")),
     ("BLANK", None),
     ("SECTION", "Contact"),
@@ -54,7 +59,8 @@ art_w = max(len(l) for l in art_lines) * CHAR_W
 info_x = PAD + art_w + 30
 width = round(info_x + INFO_WIDTH * CHAR_W + PAD)
 height = round(len(art_lines) * ART_LH + 2 * PAD)
-info_y0 = (height - len(INFO) * INFO_LH) / 2 + 10
+INFO_LH = min(22, (height - 60) // len(INFO))   # stretch panel to full height
+info_y0 = (height - len(INFO) * INFO_LH) / 2 + 12
 
 
 def kv_tspans(key, value, c):
