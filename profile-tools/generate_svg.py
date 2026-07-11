@@ -6,7 +6,7 @@ ART_FILE = "ascii_art.txt"
 INFO_WIDTH = 62          # every info line padded to this many chars
 CHAR_W = 7.2             # 12px monospace advance
 ART_LH = 13
-PAD = 26
+PAD = 20
 
 THEMES = {
     "dark_mode": dict(bg="#0d1117", border="#30363d", art="#c9d1d9",
@@ -56,7 +56,7 @@ INFO = [
 
 art_lines = open(ART_FILE).read().splitlines()
 art_w = max(len(l) for l in art_lines) * CHAR_W
-info_x = PAD + art_w + 30
+info_x = PAD + art_w + 24
 width = round(info_x + INFO_WIDTH * CHAR_W + PAD)
 height = round(len(art_lines) * ART_LH + 2 * PAD)
 INFO_LH = min(22, (height - 60) // len(INFO))   # stretch panel to full height

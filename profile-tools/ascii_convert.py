@@ -2,12 +2,12 @@ import math
 from PIL import Image, ImageOps, ImageFilter
 
 RAMP = "@%#WM8B$&okbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
-W, H = 70, 54
+W, H = 70, 51
 SOBEL_X = ImageFilter.Kernel((3, 3), [-1, 0, 1, -2, 0, 2, -1, 0, 1], scale=1, offset=128)
 SOBEL_Y = ImageFilter.Kernel((3, 3), [-1, -2, -1, 0, 0, 0, 1, 2, 1], scale=1, offset=128)
 
 img = Image.open("photo_clean.png").convert("L")
-img = img.crop((95, 5, 290, 278))
+img = img.crop((103, 0, 282, 235))
 img = ImageOps.autocontrast(img, cutoff=1)
 
 big = img.resize((W * 3, H * 3), Image.LANCZOS).filter(ImageFilter.GaussianBlur(1))
@@ -30,9 +30,9 @@ grid = [[" "] * W for _ in range(H)]
 for y in range(H):
     for x in range(W):
         p = dark[x, y]
-        if p < 130:
+        if p < 126:
             grid[y][x] = RAMP[int(min((p / 195) ** 1.25, 1.0) * (len(RAMP) - 2))]
-        elif edges[x, y] > 26 and p < 215:
+        elif edges[x, y] > 22 and p < 215:
             grid[y][x] = edge_glyph(gx[x, y] - 128, gy[x, y] - 128)
 
 for y in range(H):
