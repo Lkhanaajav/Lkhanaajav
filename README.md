@@ -34,7 +34,7 @@ Python, TypeScript, JavaScript, C++, SQL/PostgreSQL, React, Next.js, Node.js, Fa
 
 ## Current search
 
-Seeking full-time AI/backend engineering roles in the Austin area or remotely within the US. Available immediately. Currently authorized on F-1 OPT; employer sponsorship required in the future.
+Seeking full-time AI/backend engineering roles in the Austin area or remotely within the US. Available immediately.
 
 [LinkedIn](https://www.linkedin.com/in/lhanaa) | [Email](mailto:lhanaamijgee@gmail.com)
 
